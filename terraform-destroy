@@ -5,9 +5,6 @@ node {
  
     // // Get some code from a GitHub repository
     git credentialsId: '4ab8cf3a-e891-409c-8301-20692e928af6', url: "${env.GITHUB_PROJECT}"
-    sshagent(['4ab8cf3a-e891-409c-8301-20692e928af6']) {
-        sh 'git submodule update --init'
-    }
 
     // Setup the AWS Credentials
     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws',
@@ -31,7 +28,7 @@ node {
             if (fileExists("status")) {
                 sh "rm status"
             }
-            sh "./jenkins-pipelines/jenkins-init"
+            sh "./jenkins-init"
             sh "terraform get"
             sh "set +e; terraform plan -destroy -out=plan.out -var-file=environments/${env.PROJECT}/${env.PROJECT}.tfvars -detailed-exitcode; echo \$? > status"
             def exitCode = readFile('status').trim()
