@@ -5,7 +5,7 @@ node {
  
     // // Get some code from a GitHub repository
     def gitURL = ${env.GITHUB_PROJECT}
-    git credentialsId: '4ab8cf3a-e891-409c-8301-20692e928af6', url: '${gitURL}'
+    git credentialsId: '4ab8cf3a-e891-409c-8301-20692e928af6', url: ${gitURL}
 
     // Setup the AWS Credentials
     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws',
