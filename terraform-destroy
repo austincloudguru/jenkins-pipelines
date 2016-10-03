@@ -4,7 +4,7 @@ node {
     stage 'Checkout'
  
     // // Get some code from a GitHub repository
-    git credentialsId: "${env.GITHUB_USER}", url: "${env.GITHUB_PROJECT}"
+    git credentialsId: "${env.GITHUB_CREDENTIALS}", url: "${env.GITHUB_PROJECT}"
 
     // Setup the AWS Credentials
     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: "${env.AWS_USER}",
